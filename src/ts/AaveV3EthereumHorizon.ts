@@ -56,6 +56,12 @@ export const WALLET_BALANCE_PROVIDER = '0xC7be5307ba715ce89b152f3Df0658295b3dbA8
 // https://etherscan.io/address/0xe10C78A3AC7f016eD2DE1A89c5479b1039EAB9eA
 export const GHO_DIRECT_MINTER = '0xe10C78A3AC7f016eD2DE1A89c5479b1039EAB9eA';
 
+// https://etherscan.io/address/0x803e5Db3E26e88AD0a682A46c3E04cdd053D0EB9
+export const RWA_A_TOKEN_MANAGER = '0x803e5Db3E26e88AD0a682A46c3E04cdd053D0EB9';
+
+// https://etherscan.io/address/0x69D55D504BC9556E377b340D19818E736bbB318b
+export const RWA_ORACLE_PARAMS_REGISTRY = '0x69D55D504BC9556E377b340D19818E736bbB318b';
+
 export const CHAIN_ID = 1;
 export const ASSETS = {
   GHO: {
@@ -74,7 +80,7 @@ export const ASSETS = {
     A_TOKEN: '0x68215B6533c47ff9f7125aC95adf00fE4a62f79e',
     V_TOKEN: '0x4139EcBe83d78ef5EFF0A6eDA6f894Be9D590FC7',
     INTEREST_RATE_STRATEGY: '0x87593272C06f4FC49EC2942eBda0972d2F1Ab521',
-    ORACLE: '0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6',
+    ORACLE: '0x46f94aff8cF7DdC8557eF69f7276087b01C8f363',
   },
   RLUSD: {
     decimals: 18,
@@ -83,7 +89,7 @@ export const ASSETS = {
     A_TOKEN: '0xE3190143Eb552456F88464662f0c0C4aC67A77eB',
     V_TOKEN: '0xACE8a1c0eC12aE81814377491265b47F4eE5D3dD',
     INTEREST_RATE_STRATEGY: '0x87593272C06f4FC49EC2942eBda0972d2F1Ab521',
-    ORACLE: '0x26C46B7aD0012cA71F2298ada567dC9Af14E7f2A',
+    ORACLE: '0x9E7c31e9b3C76Ea759D9f7464210353862F0c957',
   },
   USTB: {
     decimals: 6,
@@ -148,6 +154,15 @@ export const ASSETS = {
     INTEREST_RATE_STRATEGY: '0x87593272C06f4FC49EC2942eBda0972d2F1Ab521',
     ORACLE: '0x60AEd7d20AC6328f7BA771aD58931c996aff30E8',
   },
+  mGLOBAL: {
+    decimals: 18,
+    id: 10,
+    UNDERLYING: '0x7433806912Eae67919e66aea853d46Fa0aef98A8',
+    A_TOKEN: '0x49d3cdE03813eE32DFD47F6aA3957d5F9CbAB985',
+    V_TOKEN: '0x40606ce958e14AD6BA575B00402d07438c3d58aC',
+    INTEREST_RATE_STRATEGY: '0x87593272C06f4FC49EC2942eBda0972d2F1Ab521',
+    ORACLE: '0xe034De753a3d855B6daD1A4984de75a5c443E939',
+  },
 } as const;
 export const E_MODES = {
   '1': {
@@ -199,16 +214,19 @@ export const E_MODES = {
     liquidationBonus: 10500,
   },
   '5': {
-    label: ' / ',
-    collateralBitmap: '0',
-    collateralAssets: [],
-    borrowableBitmap: '0',
-    borrowableAssets: [],
+    label: 'mGLOBAL / USDC,RLUSD',
+    collateralBitmap: '1024',
+    collateralAssets: ['0x7433806912Eae67919e66aea853d46Fa0aef98A8'],
+    borrowableBitmap: '6',
+    borrowableAssets: [
+      '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+      '0x8292Bb45bf1Ee4d140127049757C2E0fF06317eD',
+    ],
     ltvzeroBitmap: '0',
     ltvzeroAssets: [],
-    ltv: 8500,
-    liquidationThreshold: 8900,
-    liquidationBonus: 10310,
+    ltv: 7500,
+    liquidationThreshold: 8000,
+    liquidationBonus: 10600,
   },
   '6': {
     label: 'USYC / GHO',

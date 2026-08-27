@@ -1,20 +1,6 @@
 import {ChainId} from '@aave-dao/toolbox';
 import {PoolConfig} from 'scripts/configs/types';
 
-export const scrollSepoliaProtoV3: PoolConfig = {
-  name: 'ScrollSepolia',
-  chainId: ChainId.scroll_sepolia,
-  POOL_ADDRESSES_PROVIDER: '0x52A27dC690F8652288194Dd2bc523863eBdEa236',
-  additionalAddresses: {
-    FAUCET: '0x2F826FD1a0071476330a58dD1A9B36bcF7da832d',
-    L2_ENCODER: '0x3Bb33c67908D0d58F8d7349cBe726ff3b059e0fC',
-    UI_INCENTIVE_DATA_PROVIDER: '0xBf67A725F976d4A7C1fa9ea5303FD57D13CA0A37',
-    UI_POOL_DATA_PROVIDER: '0xDC55BcFC0963608401A4bA6298624E5895f8250a',
-    WALLET_BALANCE_PROVIDER: '0x6c68e975764a56e62AF3d1C8209F789779Eb763B',
-    WETH_GATEWAY: '0x57ce905CfD7f986A929A26b006f797d181dB706e',
-  },
-};
-
 export const scrollProtoV3: PoolConfig = {
   name: 'Scroll',
   chainId: ChainId.scroll,
@@ -22,6 +8,7 @@ export const scrollProtoV3: PoolConfig = {
   additionalAddresses: {
     L2_ENCODER: '0x8714E5ED2d8edD4E88eFf66637C3FE8eCf2B8C40',
     RISK_STEWARD: '0xc524A770ae73e57F0295aA48fd7605927a628B3b',
+    RISK_COUNCIL: '0x611439a74546888c3535B4dd119A5Cbb9f5332EA',
     CONFIG_ENGINE: '0x6A7192c55E9298874e49675A63D5ebb11eD99a66',
     POOL_ADDRESSES_PROVIDER_REGISTRY: '0xFBedc64AeE24921cb43004312B9eF367a4162b57',
     UI_INCENTIVE_DATA_PROVIDER: '0x5d4D4007A4c6336550DdAa2a7c0d5e7972eebd16',

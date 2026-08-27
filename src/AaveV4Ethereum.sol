@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.6.0;
 
-import {IHub, IHubConfigurator, ISpoke, ISpokeConfigurator, ITokenizationSpoke, ITreasurySpoke, IAaveOracle, IConfigPositionManager, IGiverPositionManager, ITakerPositionManager, INativeTokenGateway, ISignatureGateway, IAaveV4ConfigEngine, IAccessManagerEnumerable} from './AaveV4.sol';
+import {IHub, IHubConfigurator, ISpoke, ISpokeConfigurator, ITokenizationSpoke, ITreasurySpoke, IAaveOracle, IConfigPositionManager, IGiverPositionManager, ITakerPositionManager, INativeTokenGateway, ISignatureGateway, IAaveV4ConfigEngine, IAccessManagerEnumerable, IBasicInterestRateStrategy, PositionManagers} from './AaveV4.sol';
 library AaveV4Ethereum {
   // https://etherscan.io/address/0x08aE3BE30958cDd1847ec58fFfd4C451a87fDF01
   IAccessManagerEnumerable internal constant ACCESS_MANAGER =
@@ -20,9 +20,9 @@ library AaveV4Ethereum {
   ITreasurySpoke internal constant TREASURY_SPOKE =
     ITreasurySpoke(0xB9B0b8616f6Bf6841972a52058132BE08d723155);
 
-  // https://etherscan.io/address/0xe8096f931734286a95b6A63eFFCEFD3C56F3f6a9
+  // https://etherscan.io/address/0xa1673fbD457747A05e91D9ef904Cb12827916B1E
   IAaveV4ConfigEngine internal constant CONFIG_ENGINE =
-    IAaveV4ConfigEngine(0xe8096f931734286a95b6A63eFFCEFD3C56F3f6a9);
+    IAaveV4ConfigEngine(0xa1673fbD457747A05e91D9ef904Cb12827916B1E);
 }
 library AaveV4EthereumHubs {
   // https://etherscan.io/address/0xCca852Bc40e560adC3b1Cc58CA5b55638ce826c9
@@ -33,6 +33,9 @@ library AaveV4EthereumHubs {
 
   // https://etherscan.io/address/0x943827DCA022D0F354a8a8c332dA1e5Eb9f9F931
   IHub internal constant PRIME_HUB = IHub(0x943827DCA022D0F354a8a8c332dA1e5Eb9f9F931);
+
+  // https://etherscan.io/address/0x62d63197660c080236193CA60b70E49A08E90368
+  IHub internal constant GLOBAL_DOLLAR_HUB = IHub(0x62d63197660c080236193CA60b70E49A08E90368);
 }
 library AaveV4EthereumSpokes {
   // https://etherscan.io/address/0xB9B0b8616f6Bf6841972a52058132BE08d723155
@@ -90,6 +93,13 @@ library AaveV4EthereumSpokes {
   IAaveOracle internal constant MAIN_SPOKE_ORACLE =
     IAaveOracle(0x99B2B6CEa9C3D2fd8F4d90f86741C44B212a6127);
 
+  // https://etherscan.io/address/0x956d8e0A89cfa3744428C4641b5a53B56167a7f9
+  ISpoke internal constant USDG_PENDLE_SPOKE = ISpoke(0x956d8e0A89cfa3744428C4641b5a53B56167a7f9);
+
+  // https://etherscan.io/address/0x692cD2F7653680aFf316Ac309ce825FCF573B7Ee
+  IAaveOracle internal constant USDG_PENDLE_SPOKE_ORACLE =
+    IAaveOracle(0x692cD2F7653680aFf316Ac309ce825FCF573B7Ee);
+
   // https://etherscan.io/address/0xbF10BDfE177dE0336aFD7fcCF80A904E15386219
   ISpoke internal constant ETHERFI_ESPOKE = ISpoke(0xbF10BDfE177dE0336aFD7fcCF80A904E15386219);
 
@@ -110,6 +120,13 @@ library AaveV4EthereumSpokes {
   // https://etherscan.io/address/0x664D73b6C3591333Fd79510f7ce9ef81228824F5
   IAaveOracle internal constant LIDO_ESPOKE_ORACLE =
     IAaveOracle(0x664D73b6C3591333Fd79510f7ce9ef81228824F5);
+
+  // https://etherscan.io/address/0x774b9655413c34809c1f1b16b654465A89EBE989
+  ISpoke internal constant USDG_MAPLE_ESPOKE = ISpoke(0x774b9655413c34809c1f1b16b654465A89EBE989);
+
+  // https://etherscan.io/address/0x47a7cC7Fd47aCed15087a8b6e0ACFddCD63C811A
+  IAaveOracle internal constant USDG_MAPLE_ESPOKE_ORACLE =
+    IAaveOracle(0x47a7cC7Fd47aCed15087a8b6e0ACFddCD63C811A);
 }
 library AaveV4EthereumSpokePriceFeeds {
   // https://etherscan.io/address/0x5424384B256154046E9667dDFaaa5e550145215e
@@ -228,9 +245,9 @@ library AaveV4EthereumSpokePriceFeeds {
   address internal constant FOREX_SPOKE_RLUSD_PRICE_FEED =
     0xf0eaC18E908B34770FDEe46d069c846bDa866759;
 
-  // https://etherscan.io/address/0xF29b1e3b68Fd59DD0a413811fD5d0AbaE653216d
+  // https://etherscan.io/address/0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4
   address internal constant FOREX_SPOKE_USDG_PRICE_FEED =
-    0xF29b1e3b68Fd59DD0a413811fD5d0AbaE653216d;
+    0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4;
 
   // https://etherscan.io/address/0x25DEd2f9aE6ae9416693AB63Abe3aB25493861FD
   address internal constant FOREX_SPOKE_frxUSD_PRICE_FEED =
@@ -249,8 +266,8 @@ library AaveV4EthereumSpokePriceFeeds {
   address internal constant GOLD_SPOKE_RLUSD_PRICE_FEED =
     0xf0eaC18E908B34770FDEe46d069c846bDa866759;
 
-  // https://etherscan.io/address/0xF29b1e3b68Fd59DD0a413811fD5d0AbaE653216d
-  address internal constant GOLD_SPOKE_USDG_PRICE_FEED = 0xF29b1e3b68Fd59DD0a413811fD5d0AbaE653216d;
+  // https://etherscan.io/address/0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4
+  address internal constant GOLD_SPOKE_USDG_PRICE_FEED = 0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4;
 
   // https://etherscan.io/address/0x25DEd2f9aE6ae9416693AB63Abe3aB25493861FD
   address internal constant GOLD_SPOKE_frxUSD_PRICE_FEED =
@@ -314,8 +331,8 @@ library AaveV4EthereumSpokePriceFeeds {
   address internal constant MAIN_SPOKE_RLUSD_PRICE_FEED =
     0xf0eaC18E908B34770FDEe46d069c846bDa866759;
 
-  // https://etherscan.io/address/0xF29b1e3b68Fd59DD0a413811fD5d0AbaE653216d
-  address internal constant MAIN_SPOKE_USDG_PRICE_FEED = 0xF29b1e3b68Fd59DD0a413811fD5d0AbaE653216d;
+  // https://etherscan.io/address/0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4
+  address internal constant MAIN_SPOKE_USDG_PRICE_FEED = 0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4;
 
   // https://etherscan.io/address/0x25DEd2f9aE6ae9416693AB63Abe3aB25493861FD
   address internal constant MAIN_SPOKE_frxUSD_PRICE_FEED =
@@ -323,6 +340,22 @@ library AaveV4EthereumSpokePriceFeeds {
 
   // https://etherscan.io/address/0xD110cac5d8682A3b045D5524a9903E031d70FCCd
   address internal constant MAIN_SPOKE_GHO_PRICE_FEED = 0xD110cac5d8682A3b045D5524a9903E031d70FCCd;
+
+  // https://etherscan.io/address/0x89F6Eb404AbF19FE817426dD2E2E0F14D1a5712e
+  address internal constant USDG_PENDLE_SPOKE_PT_USDG_24SEP2026_PRICE_FEED =
+    0x89F6Eb404AbF19FE817426dD2E2E0F14D1a5712e;
+
+  // https://etherscan.io/address/0x3f73F03aa83B2A48ed27E964eD0fDb590332095B
+  address internal constant USDG_PENDLE_SPOKE_USDC_PRICE_FEED =
+    0x3f73F03aa83B2A48ed27E964eD0fDb590332095B;
+
+  // https://etherscan.io/address/0x260326c220E469358846b187eE53328303Efe19C
+  address internal constant USDG_PENDLE_SPOKE_USDT_PRICE_FEED =
+    0x260326c220E469358846b187eE53328303Efe19C;
+
+  // https://etherscan.io/address/0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4
+  address internal constant USDG_PENDLE_SPOKE_USDG_PRICE_FEED =
+    0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4;
 
   // https://etherscan.io/address/0x87625393534d5C102cADB66D37201dF24cc26d4C
   address internal constant ETHERFI_ESPOKE_weETH_PRICE_FEED =
@@ -347,6 +380,22 @@ library AaveV4EthereumSpokePriceFeeds {
   // https://etherscan.io/address/0x5424384B256154046E9667dDFaaa5e550145215e
   address internal constant LIDO_ESPOKE_WETH_PRICE_FEED =
     0x5424384B256154046E9667dDFaaa5e550145215e;
+
+  // https://etherscan.io/address/0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4
+  address internal constant USDG_MAPLE_ESPOKE_GLOBAL_DOLLAR_USDG_PRICE_FEED =
+    0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4;
+
+  // https://etherscan.io/address/0x5A6FcB0ebc018b6FD94Fc5f5A9F0948d0D40f040
+  address internal constant USDG_MAPLE_ESPOKE_syrupUSDG_PRICE_FEED =
+    0x5A6FcB0ebc018b6FD94Fc5f5A9F0948d0D40f040;
+
+  // https://etherscan.io/address/0x3f73F03aa83B2A48ed27E964eD0fDb590332095B
+  address internal constant USDG_MAPLE_ESPOKE_USDC_PRICE_FEED =
+    0x3f73F03aa83B2A48ed27E964eD0fDb590332095B;
+
+  // https://etherscan.io/address/0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4
+  address internal constant USDG_MAPLE_ESPOKE_CORE_USDG_PRICE_FEED =
+    0x83D20dEEdcd4aC1313496c8CBcAad0fa298c0CE4;
 }
 library AaveV4EthereumTokenizationSpokes {
   // https://etherscan.io/address/0x7320CF22Ac095bA2a2e0a652F77efB836c2E751b
@@ -472,6 +521,167 @@ library AaveV4EthereumTokenizationSpokes {
   // https://etherscan.io/address/0x900fD46d565d1ac8995928c0179052ec02a6D0E1
   ITokenizationSpoke internal constant PRIME_GHO_TOKENIZATION_SPOKE =
     ITokenizationSpoke(0x900fD46d565d1ac8995928c0179052ec02a6D0E1);
+
+  // https://etherscan.io/address/0x7Df10B4A01350D2A1d95cFbE7c9207d7210A2663
+  ITokenizationSpoke internal constant GLOBAL_DOLLAR_PT_USDG_24SEP2026_TOKENIZATION_SPOKE =
+    ITokenizationSpoke(0x7Df10B4A01350D2A1d95cFbE7c9207d7210A2663);
+
+  // https://etherscan.io/address/0xaed7c529bD2878170B61C758DfAa215AC7a4FD07
+  ITokenizationSpoke internal constant GLOBAL_DOLLAR_USDC_TOKENIZATION_SPOKE =
+    ITokenizationSpoke(0xaed7c529bD2878170B61C758DfAa215AC7a4FD07);
+
+  // https://etherscan.io/address/0xa0e97e45C2f89003730E467Bd484fA3eEcE5B4Cf
+  ITokenizationSpoke internal constant GLOBAL_DOLLAR_USDT_TOKENIZATION_SPOKE =
+    ITokenizationSpoke(0xa0e97e45C2f89003730E467Bd484fA3eEcE5B4Cf);
+
+  // https://etherscan.io/address/0x378B4a7c394E22bd562F66eB612165893533c124
+  ITokenizationSpoke internal constant GLOBAL_DOLLAR_USDG_TOKENIZATION_SPOKE =
+    ITokenizationSpoke(0x378B4a7c394E22bd562F66eB612165893533c124);
+}
+library AaveV4EthereumIRStrategies {
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_WETH_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_wstETH_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_weETH_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_rsETH_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_USDT_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_USDC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_GHO_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_RLUSD_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_USDG_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_frxUSD_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_EURC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_WBTC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_cbBTC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_LBTC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_XAUt_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_AAVE_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f
+  IBasicInterestRateStrategy internal constant CORE_LINK_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xAD88791B0F81D1FA242f637eB05bee0cbc53fe2f);
+
+  // https://etherscan.io/address/0x31280650661b8443723fa9739b3A164E3696af48
+  IBasicInterestRateStrategy internal constant PLUS_PT_sUSDE_7MAY2026_IR_STRATEGY =
+    IBasicInterestRateStrategy(0x31280650661b8443723fa9739b3A164E3696af48);
+
+  // https://etherscan.io/address/0x31280650661b8443723fa9739b3A164E3696af48
+  IBasicInterestRateStrategy internal constant PLUS_PT_USDe_7MAY2026_IR_STRATEGY =
+    IBasicInterestRateStrategy(0x31280650661b8443723fa9739b3A164E3696af48);
+
+  // https://etherscan.io/address/0x31280650661b8443723fa9739b3A164E3696af48
+  IBasicInterestRateStrategy internal constant PLUS_sUSDe_IR_STRATEGY =
+    IBasicInterestRateStrategy(0x31280650661b8443723fa9739b3A164E3696af48);
+
+  // https://etherscan.io/address/0x31280650661b8443723fa9739b3A164E3696af48
+  IBasicInterestRateStrategy internal constant PLUS_USDe_IR_STRATEGY =
+    IBasicInterestRateStrategy(0x31280650661b8443723fa9739b3A164E3696af48);
+
+  // https://etherscan.io/address/0x31280650661b8443723fa9739b3A164E3696af48
+  IBasicInterestRateStrategy internal constant PLUS_USDC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0x31280650661b8443723fa9739b3A164E3696af48);
+
+  // https://etherscan.io/address/0x31280650661b8443723fa9739b3A164E3696af48
+  IBasicInterestRateStrategy internal constant PLUS_GHO_IR_STRATEGY =
+    IBasicInterestRateStrategy(0x31280650661b8443723fa9739b3A164E3696af48);
+
+  // https://etherscan.io/address/0x31280650661b8443723fa9739b3A164E3696af48
+  IBasicInterestRateStrategy internal constant PLUS_USDT_IR_STRATEGY =
+    IBasicInterestRateStrategy(0x31280650661b8443723fa9739b3A164E3696af48);
+
+  // https://etherscan.io/address/0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D
+  IBasicInterestRateStrategy internal constant PRIME_WETH_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D);
+
+  // https://etherscan.io/address/0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D
+  IBasicInterestRateStrategy internal constant PRIME_WBTC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D);
+
+  // https://etherscan.io/address/0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D
+  IBasicInterestRateStrategy internal constant PRIME_cbBTC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D);
+
+  // https://etherscan.io/address/0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D
+  IBasicInterestRateStrategy internal constant PRIME_wstETH_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D);
+
+  // https://etherscan.io/address/0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D
+  IBasicInterestRateStrategy internal constant PRIME_USDC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D);
+
+  // https://etherscan.io/address/0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D
+  IBasicInterestRateStrategy internal constant PRIME_USDT_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D);
+
+  // https://etherscan.io/address/0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D
+  IBasicInterestRateStrategy internal constant PRIME_GHO_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xDCd924047a4bDBFef9CCDDe845E5D45373Ad276D);
+
+  // https://etherscan.io/address/0xD7eC225DC053151100A0ef47b94a77AAD9C413b7
+  IBasicInterestRateStrategy internal constant GLOBAL_DOLLAR_PT_USDG_24SEP2026_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xD7eC225DC053151100A0ef47b94a77AAD9C413b7);
+
+  // https://etherscan.io/address/0xD7eC225DC053151100A0ef47b94a77AAD9C413b7
+  IBasicInterestRateStrategy internal constant GLOBAL_DOLLAR_USDC_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xD7eC225DC053151100A0ef47b94a77AAD9C413b7);
+
+  // https://etherscan.io/address/0xD7eC225DC053151100A0ef47b94a77AAD9C413b7
+  IBasicInterestRateStrategy internal constant GLOBAL_DOLLAR_USDT_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xD7eC225DC053151100A0ef47b94a77AAD9C413b7);
+
+  // https://etherscan.io/address/0xD7eC225DC053151100A0ef47b94a77AAD9C413b7
+  IBasicInterestRateStrategy internal constant GLOBAL_DOLLAR_USDG_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xD7eC225DC053151100A0ef47b94a77AAD9C413b7);
+
+  // https://etherscan.io/address/0xD7eC225DC053151100A0ef47b94a77AAD9C413b7
+  IBasicInterestRateStrategy internal constant GLOBAL_DOLLAR_syrupUSDG_IR_STRATEGY =
+    IBasicInterestRateStrategy(0xD7eC225DC053151100A0ef47b94a77AAD9C413b7);
 }
 library AaveV4EthereumPositionManagers {
   // https://etherscan.io/address/0x17A54b8d6D9C68e7fa1C7112AC998EA1BA51d11e
@@ -605,18 +815,30 @@ library AaveV4EthereumAssets {
   address internal constant USDe_UNDERLYING = 0x4c9EDD5852cd905f086C759E8383e09bff1E68B3;
 
   uint8 internal constant USDe_DECIMALS = 18;
+
+  // https://etherscan.io/address/0xc1906aeCf868749a2DeE203F59b904c0cf212140
+  address internal constant PT_USDG_24SEP2026_UNDERLYING =
+    0xc1906aeCf868749a2DeE203F59b904c0cf212140;
+
+  uint8 internal constant PT_USDG_24SEP2026_DECIMALS = 6;
+
+  // https://etherscan.io/address/0x87b65C4aAFFA76881f9E96F3e7ED945ddFC3Cd7A
+  address internal constant syrupUSDG_UNDERLYING = 0x87b65C4aAFFA76881f9E96F3e7ED945ddFC3Cd7A;
+
+  uint8 internal constant syrupUSDG_DECIMALS = 6;
 }
 library AaveV4EthereumGetters {
   function getAllHubs() internal pure returns (IHub[] memory) {
-    IHub[] memory hubs = new IHub[](3);
+    IHub[] memory hubs = new IHub[](4);
     hubs[0] = AaveV4EthereumHubs.CORE_HUB;
     hubs[1] = AaveV4EthereumHubs.PLUS_HUB;
     hubs[2] = AaveV4EthereumHubs.PRIME_HUB;
+    hubs[3] = AaveV4EthereumHubs.GLOBAL_DOLLAR_HUB;
     return hubs;
   }
 
   function getAllSpokes() internal pure returns (ISpoke[] memory) {
-    ISpoke[] memory spokes = new ISpoke[](10);
+    ISpoke[] memory spokes = new ISpoke[](12);
     spokes[0] = AaveV4EthereumSpokes.BLUECHIP_SPOKE;
     spokes[1] = AaveV4EthereumSpokes.ETHENA_CORRELATED_SPOKE;
     spokes[2] = AaveV4EthereumSpokes.ETHENA_ECOSYSTEM_SPOKE;
@@ -624,14 +846,16 @@ library AaveV4EthereumGetters {
     spokes[4] = AaveV4EthereumSpokes.GOLD_SPOKE;
     spokes[5] = AaveV4EthereumSpokes.LOMBARD_BTC_SPOKE;
     spokes[6] = AaveV4EthereumSpokes.MAIN_SPOKE;
-    spokes[7] = AaveV4EthereumSpokes.ETHERFI_ESPOKE;
-    spokes[8] = AaveV4EthereumSpokes.KELP_ESPOKE;
-    spokes[9] = AaveV4EthereumSpokes.LIDO_ESPOKE;
+    spokes[7] = AaveV4EthereumSpokes.USDG_PENDLE_SPOKE;
+    spokes[8] = AaveV4EthereumSpokes.ETHERFI_ESPOKE;
+    spokes[9] = AaveV4EthereumSpokes.KELP_ESPOKE;
+    spokes[10] = AaveV4EthereumSpokes.LIDO_ESPOKE;
+    spokes[11] = AaveV4EthereumSpokes.USDG_MAPLE_ESPOKE;
     return spokes;
   }
 
   function getAllTokenizationSpokes() internal pure returns (ITokenizationSpoke[] memory) {
-    ITokenizationSpoke[] memory tokenizedSpokes = new ITokenizationSpoke[](31);
+    ITokenizationSpoke[] memory tokenizedSpokes = new ITokenizationSpoke[](35);
     tokenizedSpokes[0] = AaveV4EthereumTokenizationSpokes.CORE_WETH_TOKENIZATION_SPOKE;
     tokenizedSpokes[1] = AaveV4EthereumTokenizationSpokes.CORE_wstETH_TOKENIZATION_SPOKE;
     tokenizedSpokes[2] = AaveV4EthereumTokenizationSpokes.CORE_weETH_TOKENIZATION_SPOKE;
@@ -664,11 +888,16 @@ library AaveV4EthereumGetters {
     tokenizedSpokes[28] = AaveV4EthereumTokenizationSpokes.PRIME_USDC_TOKENIZATION_SPOKE;
     tokenizedSpokes[29] = AaveV4EthereumTokenizationSpokes.PRIME_USDT_TOKENIZATION_SPOKE;
     tokenizedSpokes[30] = AaveV4EthereumTokenizationSpokes.PRIME_GHO_TOKENIZATION_SPOKE;
+    tokenizedSpokes[31] = AaveV4EthereumTokenizationSpokes
+      .GLOBAL_DOLLAR_PT_USDG_24SEP2026_TOKENIZATION_SPOKE;
+    tokenizedSpokes[32] = AaveV4EthereumTokenizationSpokes.GLOBAL_DOLLAR_USDC_TOKENIZATION_SPOKE;
+    tokenizedSpokes[33] = AaveV4EthereumTokenizationSpokes.GLOBAL_DOLLAR_USDT_TOKENIZATION_SPOKE;
+    tokenizedSpokes[34] = AaveV4EthereumTokenizationSpokes.GLOBAL_DOLLAR_USDG_TOKENIZATION_SPOKE;
     return tokenizedSpokes;
   }
 
   function getAllSpokesRaw() internal pure returns (address[] memory) {
-    address[] memory spokes = new address[](42);
+    address[] memory spokes = new address[](48);
     spokes[0] = address(AaveV4EthereumSpokes.TREASURY_SPOKE);
     spokes[1] = address(AaveV4EthereumSpokes.BLUECHIP_SPOKE);
     spokes[2] = address(AaveV4EthereumSpokes.ETHENA_CORRELATED_SPOKE);
@@ -677,42 +906,61 @@ library AaveV4EthereumGetters {
     spokes[5] = address(AaveV4EthereumSpokes.GOLD_SPOKE);
     spokes[6] = address(AaveV4EthereumSpokes.LOMBARD_BTC_SPOKE);
     spokes[7] = address(AaveV4EthereumSpokes.MAIN_SPOKE);
-    spokes[8] = address(AaveV4EthereumSpokes.ETHERFI_ESPOKE);
-    spokes[9] = address(AaveV4EthereumSpokes.KELP_ESPOKE);
-    spokes[10] = address(AaveV4EthereumSpokes.LIDO_ESPOKE);
-    spokes[11] = address(AaveV4EthereumTokenizationSpokes.CORE_WETH_TOKENIZATION_SPOKE);
-    spokes[12] = address(AaveV4EthereumTokenizationSpokes.CORE_wstETH_TOKENIZATION_SPOKE);
-    spokes[13] = address(AaveV4EthereumTokenizationSpokes.CORE_weETH_TOKENIZATION_SPOKE);
-    spokes[14] = address(AaveV4EthereumTokenizationSpokes.CORE_rsETH_TOKENIZATION_SPOKE);
-    spokes[15] = address(AaveV4EthereumTokenizationSpokes.CORE_USDT_TOKENIZATION_SPOKE);
-    spokes[16] = address(AaveV4EthereumTokenizationSpokes.CORE_USDC_TOKENIZATION_SPOKE);
-    spokes[17] = address(AaveV4EthereumTokenizationSpokes.CORE_GHO_TOKENIZATION_SPOKE);
-    spokes[18] = address(AaveV4EthereumTokenizationSpokes.CORE_RLUSD_TOKENIZATION_SPOKE);
-    spokes[19] = address(AaveV4EthereumTokenizationSpokes.CORE_USDG_TOKENIZATION_SPOKE);
-    spokes[20] = address(AaveV4EthereumTokenizationSpokes.CORE_frxUSD_TOKENIZATION_SPOKE);
-    spokes[21] = address(AaveV4EthereumTokenizationSpokes.CORE_EURC_TOKENIZATION_SPOKE);
-    spokes[22] = address(AaveV4EthereumTokenizationSpokes.CORE_WBTC_TOKENIZATION_SPOKE);
-    spokes[23] = address(AaveV4EthereumTokenizationSpokes.CORE_cbBTC_TOKENIZATION_SPOKE);
-    spokes[24] = address(AaveV4EthereumTokenizationSpokes.CORE_LBTC_TOKENIZATION_SPOKE);
-    spokes[25] = address(AaveV4EthereumTokenizationSpokes.CORE_XAUt_TOKENIZATION_SPOKE);
-    spokes[26] = address(AaveV4EthereumTokenizationSpokes.CORE_AAVE_TOKENIZATION_SPOKE);
-    spokes[27] = address(AaveV4EthereumTokenizationSpokes.CORE_LINK_TOKENIZATION_SPOKE);
-    spokes[28] = address(
+    spokes[8] = address(AaveV4EthereumSpokes.USDG_PENDLE_SPOKE);
+    spokes[9] = address(AaveV4EthereumSpokes.ETHERFI_ESPOKE);
+    spokes[10] = address(AaveV4EthereumSpokes.KELP_ESPOKE);
+    spokes[11] = address(AaveV4EthereumSpokes.LIDO_ESPOKE);
+    spokes[12] = address(AaveV4EthereumSpokes.USDG_MAPLE_ESPOKE);
+    spokes[13] = address(AaveV4EthereumTokenizationSpokes.CORE_WETH_TOKENIZATION_SPOKE);
+    spokes[14] = address(AaveV4EthereumTokenizationSpokes.CORE_wstETH_TOKENIZATION_SPOKE);
+    spokes[15] = address(AaveV4EthereumTokenizationSpokes.CORE_weETH_TOKENIZATION_SPOKE);
+    spokes[16] = address(AaveV4EthereumTokenizationSpokes.CORE_rsETH_TOKENIZATION_SPOKE);
+    spokes[17] = address(AaveV4EthereumTokenizationSpokes.CORE_USDT_TOKENIZATION_SPOKE);
+    spokes[18] = address(AaveV4EthereumTokenizationSpokes.CORE_USDC_TOKENIZATION_SPOKE);
+    spokes[19] = address(AaveV4EthereumTokenizationSpokes.CORE_GHO_TOKENIZATION_SPOKE);
+    spokes[20] = address(AaveV4EthereumTokenizationSpokes.CORE_RLUSD_TOKENIZATION_SPOKE);
+    spokes[21] = address(AaveV4EthereumTokenizationSpokes.CORE_USDG_TOKENIZATION_SPOKE);
+    spokes[22] = address(AaveV4EthereumTokenizationSpokes.CORE_frxUSD_TOKENIZATION_SPOKE);
+    spokes[23] = address(AaveV4EthereumTokenizationSpokes.CORE_EURC_TOKENIZATION_SPOKE);
+    spokes[24] = address(AaveV4EthereumTokenizationSpokes.CORE_WBTC_TOKENIZATION_SPOKE);
+    spokes[25] = address(AaveV4EthereumTokenizationSpokes.CORE_cbBTC_TOKENIZATION_SPOKE);
+    spokes[26] = address(AaveV4EthereumTokenizationSpokes.CORE_LBTC_TOKENIZATION_SPOKE);
+    spokes[27] = address(AaveV4EthereumTokenizationSpokes.CORE_XAUt_TOKENIZATION_SPOKE);
+    spokes[28] = address(AaveV4EthereumTokenizationSpokes.CORE_AAVE_TOKENIZATION_SPOKE);
+    spokes[29] = address(AaveV4EthereumTokenizationSpokes.CORE_LINK_TOKENIZATION_SPOKE);
+    spokes[30] = address(
       AaveV4EthereumTokenizationSpokes.PLUS_PT_sUSDE_7MAY2026_TOKENIZATION_SPOKE
     );
-    spokes[29] = address(AaveV4EthereumTokenizationSpokes.PLUS_PT_USDe_7MAY2026_TOKENIZATION_SPOKE);
-    spokes[30] = address(AaveV4EthereumTokenizationSpokes.PLUS_sUSDe_TOKENIZATION_SPOKE);
-    spokes[31] = address(AaveV4EthereumTokenizationSpokes.PLUS_USDe_TOKENIZATION_SPOKE);
-    spokes[32] = address(AaveV4EthereumTokenizationSpokes.PLUS_USDC_TOKENIZATION_SPOKE);
-    spokes[33] = address(AaveV4EthereumTokenizationSpokes.PLUS_GHO_TOKENIZATION_SPOKE);
-    spokes[34] = address(AaveV4EthereumTokenizationSpokes.PLUS_USDT_TOKENIZATION_SPOKE);
-    spokes[35] = address(AaveV4EthereumTokenizationSpokes.PRIME_WETH_TOKENIZATION_SPOKE);
-    spokes[36] = address(AaveV4EthereumTokenizationSpokes.PRIME_WBTC_TOKENIZATION_SPOKE);
-    spokes[37] = address(AaveV4EthereumTokenizationSpokes.PRIME_cbBTC_TOKENIZATION_SPOKE);
-    spokes[38] = address(AaveV4EthereumTokenizationSpokes.PRIME_wstETH_TOKENIZATION_SPOKE);
-    spokes[39] = address(AaveV4EthereumTokenizationSpokes.PRIME_USDC_TOKENIZATION_SPOKE);
-    spokes[40] = address(AaveV4EthereumTokenizationSpokes.PRIME_USDT_TOKENIZATION_SPOKE);
-    spokes[41] = address(AaveV4EthereumTokenizationSpokes.PRIME_GHO_TOKENIZATION_SPOKE);
+    spokes[31] = address(AaveV4EthereumTokenizationSpokes.PLUS_PT_USDe_7MAY2026_TOKENIZATION_SPOKE);
+    spokes[32] = address(AaveV4EthereumTokenizationSpokes.PLUS_sUSDe_TOKENIZATION_SPOKE);
+    spokes[33] = address(AaveV4EthereumTokenizationSpokes.PLUS_USDe_TOKENIZATION_SPOKE);
+    spokes[34] = address(AaveV4EthereumTokenizationSpokes.PLUS_USDC_TOKENIZATION_SPOKE);
+    spokes[35] = address(AaveV4EthereumTokenizationSpokes.PLUS_GHO_TOKENIZATION_SPOKE);
+    spokes[36] = address(AaveV4EthereumTokenizationSpokes.PLUS_USDT_TOKENIZATION_SPOKE);
+    spokes[37] = address(AaveV4EthereumTokenizationSpokes.PRIME_WETH_TOKENIZATION_SPOKE);
+    spokes[38] = address(AaveV4EthereumTokenizationSpokes.PRIME_WBTC_TOKENIZATION_SPOKE);
+    spokes[39] = address(AaveV4EthereumTokenizationSpokes.PRIME_cbBTC_TOKENIZATION_SPOKE);
+    spokes[40] = address(AaveV4EthereumTokenizationSpokes.PRIME_wstETH_TOKENIZATION_SPOKE);
+    spokes[41] = address(AaveV4EthereumTokenizationSpokes.PRIME_USDC_TOKENIZATION_SPOKE);
+    spokes[42] = address(AaveV4EthereumTokenizationSpokes.PRIME_USDT_TOKENIZATION_SPOKE);
+    spokes[43] = address(AaveV4EthereumTokenizationSpokes.PRIME_GHO_TOKENIZATION_SPOKE);
+    spokes[44] = address(
+      AaveV4EthereumTokenizationSpokes.GLOBAL_DOLLAR_PT_USDG_24SEP2026_TOKENIZATION_SPOKE
+    );
+    spokes[45] = address(AaveV4EthereumTokenizationSpokes.GLOBAL_DOLLAR_USDC_TOKENIZATION_SPOKE);
+    spokes[46] = address(AaveV4EthereumTokenizationSpokes.GLOBAL_DOLLAR_USDT_TOKENIZATION_SPOKE);
+    spokes[47] = address(AaveV4EthereumTokenizationSpokes.GLOBAL_DOLLAR_USDG_TOKENIZATION_SPOKE);
     return spokes;
+  }
+
+  function getPositionManagers() internal pure returns (PositionManagers memory) {
+    return
+      PositionManagers({
+        giver: AaveV4EthereumPositionManagers.GIVER_POSITION_MANAGER,
+        taker: AaveV4EthereumPositionManagers.TAKER_POSITION_MANAGER,
+        config: AaveV4EthereumPositionManagers.CONFIG_POSITION_MANAGER,
+        nativeGateway: AaveV4EthereumPositionManagers.NATIVE_TOKEN_GATEWAY,
+        signatureGateway: AaveV4EthereumPositionManagers.SIGNATURE_GATEWAY
+      });
   }
 }

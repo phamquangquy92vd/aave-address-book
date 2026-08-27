@@ -80,6 +80,9 @@ library AaveV3Mantle {
   // https://mantlescan.xyz/address/0xb5a1Fe36dcf5Ba149Cb8d90A03f4709141eE5442
   address internal constant RISK_STEWARD = 0xb5a1Fe36dcf5Ba149Cb8d90A03f4709141eE5442;
 
+  // https://mantlescan.xyz/address/0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5
+  address internal constant RISK_COUNCIL = 0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5;
+
   // https://mantlescan.xyz/address/0xB238ce4d8EA3D99b0d90Fe7DA3F17149F88a2601
   address internal constant DUST_BIN = 0xB238ce4d8EA3D99b0d90Fe7DA3F17149F88a2601;
 }
@@ -275,6 +278,8 @@ library AaveV3MantleEModes {
   uint8 internal constant syrupUSDT__USDT0_USDC_GHO = 4;
 
   uint8 internal constant wrsETH__WETH = 5;
+
+  uint8 internal constant WMNT__USDT0_USDC_GHO = 6;
 }
 library AaveV3MantleExternalLibraries {
   // https://mantlescan.xyz/address/0x6D414cd0d5eAf8C43200ac0c325A7E2Ad83B8be6

@@ -58,6 +58,9 @@ library AaveV3XLayer {
   // https://www.oklink.com/xlayer/address/0x7D0219C7037819B3F5d73E235C595189C3F8c224
   address internal constant RISK_STEWARD = 0x7D0219C7037819B3F5d73E235C595189C3F8c224;
 
+  // https://www.oklink.com/xlayer/address/0xa43F8eDf0a0aE07e951bca11162625e77e7609A1
+  address internal constant RISK_COUNCIL = 0xa43F8eDf0a0aE07e951bca11162625e77e7609A1;
+
   // https://www.oklink.com/xlayer/address/0x0f2b21fd713379bb406bE2eA956EaFe55197DE9C
   address internal constant POOL_ADDRESSES_PROVIDER_REGISTRY =
     0x0f2b21fd713379bb406bE2eA956EaFe55197DE9C;
@@ -110,12 +113,15 @@ library AaveV3XLayerAssets {
   // https://www.oklink.com/xlayer/address/0xE6FC328D4DECB2Ae00E711743C04612ec963be46
   address internal constant USDG_V_TOKEN = 0xE6FC328D4DECB2Ae00E711743C04612ec963be46;
 
-  // https://www.oklink.com/xlayer/address/0xcFcBBF3E0C27b936Cf673c4FC8BcC68f721af475
-  address internal constant USDG_ORACLE = 0xcFcBBF3E0C27b936Cf673c4FC8BcC68f721af475;
+  // https://www.oklink.com/xlayer/address/0xe00B2732396a1f047d4A00e0165025A9cF400245
+  address internal constant USDG_ORACLE = 0xe00B2732396a1f047d4A00e0165025A9cF400245;
 
   // https://www.oklink.com/xlayer/address/0x3eFfeBDD435217A8B485dfaEFDecf766F2a3c05B
   address internal constant USDG_INTEREST_RATE_STRATEGY =
     0x3eFfeBDD435217A8B485dfaEFDecf766F2a3c05B;
+
+  // https://www.oklink.com/xlayer/address/0x97e7620A3229b3daC7049C537B0E29DA2D1021E1
+  address internal constant USDG_STATA_TOKEN = 0x97e7620A3229b3daC7049C537B0E29DA2D1021E1;
 
   // https://www.oklink.com/xlayer/address/0xb7C00000bcDEeF966b20B3D884B98E64d2b06b4f
   address internal constant xBTC_UNDERLYING = 0xb7C00000bcDEeF966b20B3D884B98E64d2b06b4f;

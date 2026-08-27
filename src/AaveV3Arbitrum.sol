@@ -55,6 +55,9 @@ library AaveV3Arbitrum {
   // https://arbiscan.io/address/0xC5762E5A5c12886D4F6768549A9C605823d029E9
   address internal constant RISK_STEWARD = 0xC5762E5A5c12886D4F6768549A9C605823d029E9;
 
+  // https://arbiscan.io/address/0x3Be327F22eB4BD8042e6944073b8826dCf357Aa2
+  address internal constant RISK_COUNCIL = 0x3Be327F22eB4BD8042e6944073b8826dCf357Aa2;
+
   // https://arbiscan.io/address/0x085E34722e04567Df9E6d2c32e82fd74f3342e79
   address internal constant EDGE_RISK_STEWARD_CAPS = 0x085E34722e04567Df9E6d2c32e82fd74f3342e79;
 
@@ -286,6 +289,9 @@ library AaveV3ArbitrumAssets {
 
   // https://arbiscan.io/address/0x1C0c8EcED17aE093b3C1a1a8fFeBE2E9513a9346
   address internal constant AAVE_STATIC_A_TOKEN = 0x1C0c8EcED17aE093b3C1a1a8fFeBE2E9513a9346;
+
+  // https://arbiscan.io/address/0xd3642A6e9fa95961130497727DC3aE6c38D625E7
+  address internal constant AAVE_STATA_TOKEN = 0xd3642A6e9fa95961130497727DC3aE6c38D625E7;
 
   // https://arbiscan.io/address/0xD22a58f79e9481D1a88e00c343885A588b34b68B
   address internal constant EURS_UNDERLYING = 0xD22a58f79e9481D1a88e00c343885A588b34b68B;

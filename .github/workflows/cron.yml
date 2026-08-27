@@ -30,18 +30,22 @@ jobs:
           fetch-depth: 0
 
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@8789b3e21e6c11b2697f5eb56eddae542f746c10 # pin@v1
-        with:
-          version: nightly
+        uses: aave-dao/github-workflows/.github/actions/foundry-setup@main
 
-      - uses: bgd-labs/github-workflows/.github/actions/setup-node@main
+      - uses: aave-dao/github-workflows/.github/actions/setup-node@main
 
-      - uses: bgd-labs/action-rpc-env@main
+      - uses: aave-dao/action-rpc-env@main
         with:
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
 
       - name: Generate library
         run: npm run generate:addresses
+
+      - name: Update verified.json cache
+        continue-on-error: true
+        run: npx vitest run tests/verification.spec.ts
+        env:
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
 
       - uses: actions/create-github-app-token@v2
         id: app-token

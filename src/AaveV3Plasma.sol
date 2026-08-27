@@ -58,6 +58,9 @@ library AaveV3Plasma {
   // https://plasmascan.to/address/0xdDE20B20E21a6F3b7080e740b684CDf5b764B80D
   address internal constant RISK_STEWARD = 0xdDE20B20E21a6F3b7080e740b684CDf5b764B80D;
 
+  // https://plasmascan.to/address/0xE71C189C7D8862EfDa0D9E031157199D2F3B4893
+  address internal constant RISK_COUNCIL = 0xE71C189C7D8862EfDa0D9E031157199D2F3B4893;
+
   // https://plasmascan.to/address/0xeE8Ba3464abcEeA6E34554d174DCbdd66083641b
   address internal constant POOL_ADDRESSES_PROVIDER_REGISTRY =
     0xeE8Ba3464abcEeA6E34554d174DCbdd66083641b;
@@ -430,6 +433,25 @@ library AaveV3PlasmaAssets {
   // https://plasmascan.to/address/0x2B16E93bdB1897f517881B3c388bABD0C62C6cdC
   address internal constant PT_sUSDE_18JUN2026_INTEREST_RATE_STRATEGY =
     0x2B16E93bdB1897f517881B3c388bABD0C62C6cdC;
+
+  // https://plasmascan.to/address/0xf7fB83435F455Bd970F2D9f943f4eECE1941b3e9
+  address internal constant PT_sUSDE_22OCT2026_UNDERLYING =
+    0xf7fB83435F455Bd970F2D9f943f4eECE1941b3e9;
+
+  uint8 internal constant PT_sUSDE_22OCT2026_DECIMALS = 18;
+
+  // https://plasmascan.to/address/0x34D33fCaCC36b9A16CE1Cab8d7FB1CAF8B7C2d00
+  address internal constant PT_sUSDE_22OCT2026_A_TOKEN = 0x34D33fCaCC36b9A16CE1Cab8d7FB1CAF8B7C2d00;
+
+  // https://plasmascan.to/address/0x8e1D74cf7bdD9F0339f807156F557536dF32a050
+  address internal constant PT_sUSDE_22OCT2026_V_TOKEN = 0x8e1D74cf7bdD9F0339f807156F557536dF32a050;
+
+  // https://plasmascan.to/address/0x9c823f4e19Ef68347810a9C139619273b8282b7e
+  address internal constant PT_sUSDE_22OCT2026_ORACLE = 0x9c823f4e19Ef68347810a9C139619273b8282b7e;
+
+  // https://plasmascan.to/address/0x2B16E93bdB1897f517881B3c388bABD0C62C6cdC
+  address internal constant PT_sUSDE_22OCT2026_INTEREST_RATE_STRATEGY =
+    0x2B16E93bdB1897f517881B3c388bABD0C62C6cdC;
 }
 library AaveV3PlasmaEModes {
   uint8 internal constant NONE = 0;
@@ -481,6 +503,10 @@ library AaveV3PlasmaEModes {
   uint8 internal constant sUSDe_PT_sUSDE_9APR2026_PT_sUSDE_18JUN2026__USDT0_USDe_GHO = 23;
 
   uint8 internal constant sUSDe_PT_sUSDE_9APR2026_PT_sUSDE_18JUN2026__USDe = 24;
+
+  uint8 internal constant sUSDe_PT_sUSDE_22OCT2026__USDT0_USDe_GHO = 25;
+
+  uint8 internal constant sUSDe_PT_sUSDE_22OCT2026__USDe = 26;
 }
 library AaveV3PlasmaExternalLibraries {
   // https://plasmascan.to/address/0x6D414cd0d5eAf8C43200ac0c325A7E2Ad83B8be6

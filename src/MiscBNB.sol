@@ -44,4 +44,10 @@ library MiscBNB {
 
   // https://bscscan.com/address/0x441E4053fDDF1e1a77a39d00309Af389096d4124
   address internal constant ROBOT_GUARDIAN = 0x441E4053fDDF1e1a77a39d00309Af389096d4124;
+
+  // https://bscscan.com/address/0x9DE1d45e2786b03498289959203F25b29B4D1193
+  address internal constant TOKENLOGIC_EXECUTION_SAFE = 0x9DE1d45e2786b03498289959203F25b29B4D1193;
+
+  // https://bscscan.com/address/0xAA12BAd4a501d45A5b771e49C2Fd415BA8BFc79d
+  address internal constant AFC_CEX_EARN_SAFE = 0xAA12BAd4a501d45A5b771e49C2Fd415BA8BFc79d;
 }

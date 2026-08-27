@@ -1,0 +1,17 @@
+import {ChainId} from '@aave-dao/toolbox';
+import {NetworkAddresses} from 'scripts/configs/types';
+
+export const monadAddresses: NetworkAddresses = {
+  name: 'Monad',
+  chainId: ChainId.monad,
+  addresses: {
+    TRANSPARENT_PROXY_FACTORY: '0x2f09b9D890535c2b5c81b1b95F7f92eeed5B9d5D',
+    PROTOCOL_GUARDIAN: '0xc887455536CBD4e615B745e70CaCde15B3117e74',
+    AHAB_SAFE: '0xAA2461f0f0A3dE5fEAF3273eAe16DEF861cf594e',
+    ALC_SAFE: '0xA1c93D2687f7014Aaf588c764E3Ce80aF016229b',
+    TOKENLOGIC_EXECUTION_SAFE: '0x9DE1d45e2786b03498289959203F25b29B4D1193',
+    AFC_SAFE: '0x22740deBa78d5a0c24C58C740e3715ec29de1bFa',
+    BUDGET_INCENTIVE_SAFE: '0x66Ac7223048037826e12cef9a848199e31AEFabE',
+    MERKL_DISTRIBUTION_SAFE: '0x89587ebe7cFF64c6527fE2Deccc3521D75763E8D',
+  },
+};

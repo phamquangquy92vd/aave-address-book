@@ -50,6 +50,9 @@ export const CONFIG_ENGINE = '0xF1Cd4193bbc1aD4a23E833170f49d60f3D35a621';
 // https://explorer.inkonchain.com/address/0xC1d38a1cdfb53Fce012A3A8CB42B64ddF60d4332
 export const RISK_STEWARD = '0xC1d38a1cdfb53Fce012A3A8CB42B64ddF60d4332';
 
+// https://explorer.inkonchain.com/address/0xEcD37F855bB9814D75A83F0021815dc5cd6fd889
+export const RISK_COUNCIL = '0xEcD37F855bB9814D75A83F0021815dc5cd6fd889';
+
 // https://explorer.inkonchain.com/address/0x501B4c19dd9C2e06E94dA7b6D5Ed4ddA013EC741
 export const POOL_ADDRESSES_PROVIDER_REGISTRY = '0x501B4c19dd9C2e06E94dA7b6D5Ed4ddA013EC741';
 
@@ -107,7 +110,7 @@ export const ASSETS = {
     A_TOKEN: '0x4cd13ce4edbB5523fd4849252b5f1bF215129D10',
     V_TOKEN: '0x08443163427BaE789774f45198315f6EAefe566C',
     INTEREST_RATE_STRATEGY: '0xCFDAdA7DCd2e785cF706BaDBC2B8Af5084d595e9',
-    ORACLE: '0xdb3B1fa77CF2c9597f9d4871Bed1Df03D096fdf3',
+    ORACLE: '0x32b1f1A1D3423dE69cf1f75092eCfDc5090d6624',
   },
   GHO: {
     decimals: 18,
@@ -143,7 +146,7 @@ export const ASSETS = {
     A_TOKEN: '0x98F6A9b82799813447E6c00E51aF5b325976199A',
     V_TOKEN: '0x33d3F390F266A21b0467efD559DC5fecD17Db52C',
     INTEREST_RATE_STRATEGY: '0xCFDAdA7DCd2e785cF706BaDBC2B8Af5084d595e9',
-    ORACLE: '0x771a1668f973f2485D32580aB53F5C4934e81531',
+    ORACLE: '0x3F727547A7F6af12156573253D91e44aC64845a3',
   },
   ezETH: {
     decimals: 18,
@@ -221,8 +224,11 @@ export const E_MODES = {
       '0xe343167631d89B6Ffc58B88d6b7fB0228795491D',
       '0x2D270e6886d130D724215A266106e6832161EAEd',
     ],
-    ltvzeroBitmap: '0',
-    ltvzeroAssets: [],
+    ltvzeroBitmap: '1536',
+    ltvzeroAssets: [
+      '0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2',
+      '0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34',
+    ],
     ltv: 9000,
     liquidationThreshold: 9200,
     liquidationBonus: 10400,
@@ -237,8 +243,8 @@ export const E_MODES = {
       '0xe343167631d89B6Ffc58B88d6b7fB0228795491D',
       '0x2D270e6886d130D724215A266106e6832161EAEd',
     ],
-    ltvzeroBitmap: '0',
-    ltvzeroAssets: [],
+    ltvzeroBitmap: '1024',
+    ltvzeroAssets: ['0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34'],
     ltv: 9000,
     liquidationThreshold: 9300,
     liquidationBonus: 10200,
@@ -254,6 +260,36 @@ export const E_MODES = {
     ltv: 9000,
     liquidationThreshold: 9200,
     liquidationBonus: 10400,
+  },
+  '5': {
+    label: 'sUSDe,USDe / USDT,USDG',
+    collateralBitmap: '1536',
+    collateralAssets: [
+      '0x211Cc4DD073734dA055fbF44a2b4667d5E5fE5d2',
+      '0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34',
+    ],
+    borrowableBitmap: '12',
+    borrowableAssets: [
+      '0x0200C29006150606B650577BBE7B6248F58470c1',
+      '0xe343167631d89B6Ffc58B88d6b7fB0228795491D',
+    ],
+    ltvzeroBitmap: '0',
+    ltvzeroAssets: [],
+    ltv: 9000,
+    liquidationThreshold: 9200,
+    liquidationBonus: 10400,
+  },
+  '6': {
+    label: 'SolvBTC / GHO',
+    collateralBitmap: '2048',
+    collateralAssets: ['0xaE4EFbc7736f963982aACb17EFA37fCBAb924cB3'],
+    borrowableBitmap: '16',
+    borrowableAssets: ['0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73'],
+    ltvzeroBitmap: '0',
+    ltvzeroAssets: [],
+    ltv: 7000,
+    liquidationThreshold: 7200,
+    liquidationBonus: 10750,
   },
 } as const;
 export const EXTERNAL_LIBRARIES = {

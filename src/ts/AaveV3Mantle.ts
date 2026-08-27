@@ -68,6 +68,9 @@ export const STATA_FACTORY = '0xfd4Eb6c531A34EC3A74C99892C5511fe6d126F91';
 // https://mantlescan.xyz/address/0xb5a1Fe36dcf5Ba149Cb8d90A03f4709141eE5442
 export const RISK_STEWARD = '0xb5a1Fe36dcf5Ba149Cb8d90A03f4709141eE5442';
 
+// https://mantlescan.xyz/address/0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5
+export const RISK_COUNCIL = '0xfF0ACe5060bd25f6900eb4bD91a868213C5346B5';
+
 // https://mantlescan.xyz/address/0xB238ce4d8EA3D99b0d90Fe7DA3F17149F88a2601
 export const DUST_BIN = '0xB238ce4d8EA3D99b0d90Fe7DA3F17149F88a2601';
 
@@ -243,6 +246,22 @@ export const E_MODES = {
     ltv: 9300,
     liquidationThreshold: 9500,
     liquidationBonus: 10100,
+  },
+  '6': {
+    label: 'WMNT / USDT0,USDC,GHO',
+    collateralBitmap: '2',
+    collateralAssets: ['0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb8'],
+    borrowableBitmap: '524',
+    borrowableAssets: [
+      '0x779Ded0c9e1022225f8E0630b35a9b54bE713736',
+      '0x09Bc4E0D864854c6aFB6eB9A9cdF58aC190D0dF9',
+      '0xfc421aD3C883Bf9E7C4f42dE845C4e4405799e73',
+    ],
+    ltvzeroBitmap: '0',
+    ltvzeroAssets: [],
+    ltv: 4000,
+    liquidationThreshold: 4500,
+    liquidationBonus: 11000,
   },
 } as const;
 export const EXTERNAL_LIBRARIES = {

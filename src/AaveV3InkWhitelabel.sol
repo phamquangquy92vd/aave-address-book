@@ -61,6 +61,9 @@ library AaveV3InkWhitelabel {
   // https://explorer.inkonchain.com/address/0xC1d38a1cdfb53Fce012A3A8CB42B64ddF60d4332
   address internal constant RISK_STEWARD = 0xC1d38a1cdfb53Fce012A3A8CB42B64ddF60d4332;
 
+  // https://explorer.inkonchain.com/address/0xEcD37F855bB9814D75A83F0021815dc5cd6fd889
+  address internal constant RISK_COUNCIL = 0xEcD37F855bB9814D75A83F0021815dc5cd6fd889;
+
   // https://explorer.inkonchain.com/address/0x501B4c19dd9C2e06E94dA7b6D5Ed4ddA013EC741
   address internal constant POOL_ADDRESSES_PROVIDER_REGISTRY =
     0x501B4c19dd9C2e06E94dA7b6D5Ed4ddA013EC741;
@@ -149,8 +152,8 @@ library AaveV3InkWhitelabelAssets {
   // https://explorer.inkonchain.com/address/0x08443163427BaE789774f45198315f6EAefe566C
   address internal constant USDG_V_TOKEN = 0x08443163427BaE789774f45198315f6EAefe566C;
 
-  // https://explorer.inkonchain.com/address/0xdb3B1fa77CF2c9597f9d4871Bed1Df03D096fdf3
-  address internal constant USDG_ORACLE = 0xdb3B1fa77CF2c9597f9d4871Bed1Df03D096fdf3;
+  // https://explorer.inkonchain.com/address/0x32b1f1A1D3423dE69cf1f75092eCfDc5090d6624
+  address internal constant USDG_ORACLE = 0x32b1f1A1D3423dE69cf1f75092eCfDc5090d6624;
 
   // https://explorer.inkonchain.com/address/0xCFDAdA7DCd2e785cF706BaDBC2B8Af5084d595e9
   address internal constant USDG_INTEREST_RATE_STRATEGY =
@@ -220,8 +223,8 @@ library AaveV3InkWhitelabelAssets {
   // https://explorer.inkonchain.com/address/0x33d3F390F266A21b0467efD559DC5fecD17Db52C
   address internal constant wrsETH_V_TOKEN = 0x33d3F390F266A21b0467efD559DC5fecD17Db52C;
 
-  // https://explorer.inkonchain.com/address/0x771a1668f973f2485D32580aB53F5C4934e81531
-  address internal constant wrsETH_ORACLE = 0x771a1668f973f2485D32580aB53F5C4934e81531;
+  // https://explorer.inkonchain.com/address/0x3F727547A7F6af12156573253D91e44aC64845a3
+  address internal constant wrsETH_ORACLE = 0x3F727547A7F6af12156573253D91e44aC64845a3;
 
   // https://explorer.inkonchain.com/address/0xCFDAdA7DCd2e785cF706BaDBC2B8Af5084d595e9
   address internal constant wrsETH_INTEREST_RATE_STRATEGY =
@@ -327,6 +330,10 @@ library AaveV3InkWhitelabelEModes {
   uint8 internal constant USDe__USDT_USDG_USDC = 3;
 
   uint8 internal constant syrupUSDT__USDT = 4;
+
+  uint8 internal constant sUSDe_USDe__USDT_USDG = 5;
+
+  uint8 internal constant SolvBTC__GHO = 6;
 }
 library AaveV3InkWhitelabelExternalLibraries {
   // https://explorer.inkonchain.com/address/0x6D414cd0d5eAf8C43200ac0c325A7E2Ad83B8be6
